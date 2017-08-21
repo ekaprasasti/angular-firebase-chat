@@ -6,17 +6,23 @@ My source code of tutorial by Wes Doyle on [youtube](https://www.youtube.com/wat
 
 ![chatroom component](/assets/chatroom-component.png)
 
+Install project
+
+```bash
+ng new angular-firebase-chat
+```
+
 Create folder and file
 
 ```bash
-mkdir app/services
-touch routes.ts`
+mkdir src/app/services
+touch src/routes.ts`
 ```
 
 ## Install Component
 
 ```bash
-ng g c chat-room
+ng g c chat-form
 ng g c chatroom
 ng g c login-form
 ng g c signup-form
@@ -32,7 +38,7 @@ ng g s auth
 ng g s chat
 ```
 
-Move the file `auth.service.ts`, `auth.service.spec.ts`, `chat.service.ts, `chat.service.spec.ts` to service folder.
+Move the file `auth.service.ts`, `auth.service.spec.ts`, `chat.service.ts`, `chat.service.spec.ts` to service folder.
 
 ## Install Firebase
 
@@ -67,13 +73,13 @@ import { appRoutes } from '../routes';
 
 @NgModule({
 	imports: [
-		RouterModulei.forRoot(appRoutes),
+		RouterModule.forRoot(appRoutes),
 		FormsModule
 	]
 });
 ```
 
-### Import services in app.module.ts file
+### Import services in `app.module.ts` file
 
 ```javascript
 import { ChatService } from './services/chat.service';
@@ -84,7 +90,7 @@ import { AuthService } from './services/auth.service';
 });	
 ```
 
-## Install firebase module in app.module.ts file
+## Install firebase module in `app.module.ts` file
 
 ```javascript
 import { AngularFireModule } from 'angularfire2';
@@ -92,10 +98,12 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 
 @NgModule({
-	AngularFireModule,
-	AngularFireDatabaseModule,
-	AngularFireAuthModule,
-	AngularFire.initializeApp(environment.firebase)
+	imports: [
+		AngularFireModule,
+		AngularFireDatabaseModule,
+		AngularFireAuthModule,
+		AngularFire.initializeApp(environment.firebase)
+	]
 });
 ```
 
@@ -156,7 +164,7 @@ Edit realtime database rules.
 }
 ```
 
-## Edit app.component.html file
+## Edit `app.component.html` file
 
 ```html
 <div class="chatRoom">
@@ -167,7 +175,7 @@ Edit realtime database rules.
 </div>
 ```
 
-## chatroom.component.html
+## `chatroom.component.html`
 
 ```html
 <div class="mainContent">
@@ -184,7 +192,7 @@ Edit realtime database rules.
 </div>
 ```
 
-## chat-form.component.html
+## `chat-form.component.html`
 
 ```html
 <input class="chatInput" [(ngModel)]="message" (keydown)="handleSubmit($event)" />
@@ -192,7 +200,7 @@ Edit realtime database rules.
 <button class="chatButton" (click)=send()>Send</button>
 ```
 
-## chat-form.component.ts
+## `chat-form.component.ts`
 
 ```javascript
 import { ChatService } from '../services/chat.service';
