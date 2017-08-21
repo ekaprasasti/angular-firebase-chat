@@ -222,4 +222,4 @@ export class ChatFormComponent implements OnInit {
 }
 ```
 
-
+To be continue at 26:20 minute
